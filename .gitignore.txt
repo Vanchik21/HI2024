@@ -1,0 +1,54 @@
+# Visual Studio специфічні файли
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+*.tlog
+*.pdb
+
+# Build результати
+bin/
+obj/
+Debug/
+Release/
+*.exe
+*.dll
+
+# Автоматично згенеровані файли
+*.g.*
+*.g.i.*
+*.csproj.user
+
+# Пакети NuGet
+*.nupkg
+packages/
+*.snupkg
+
+# Встановлення глобальних пакетів
+.vscode/
+.vscode-test/
+node_modules/
+*.code-workspace
+
+# Користувацькі конфігурації
+*.sln.ide
+
+# IDE специфічні файли
+.idea/
+*.csproj.*
+
+# Кеш автозбереження
+*.rsuser
+*.rsmiddle
+
+# Логи
+*.log
+
+# Резервні файли
+*.bak
+*.old
+*.swp
+
+# App специфічні
+NoteAppBackup.rtf
