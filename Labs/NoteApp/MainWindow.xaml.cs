@@ -65,35 +65,26 @@ namespace NoteApp
 
             if (!string.IsNullOrEmpty(symbol) && symbol.Length == 1)
             {
-                string text = new TextRange(Editor.Document.ContentStart, Editor.Document.ContentEnd).Text;
-                int index = 0;
-                while ((index = text.IndexOf(symbol, index)) != -1)
+                char searchChar = symbol[0]; 
+                TextPointer pointer = Editor.Document.ContentStart;
+
+                while (pointer != null)
                 {
-                    TextPointer start = GetTextPointerAtOffset(Editor.Document.ContentStart, index);
-                    TextPointer end = GetTextPointerAtOffset(Editor.Document.ContentStart, index + 1);
-                    if (start != null && end != null)
+                    TextPointer nextPointer = pointer.GetPositionAtOffset(1, LogicalDirection.Forward);
+                    if (nextPointer == null) break;
+                    string textInRange = new TextRange(pointer, nextPointer).Text;
+
+                    if (textInRange == symbol)
                     {
-                        new TextRange(start, end).ApplyPropertyValue(TextElement.BackgroundProperty, Brushes.Yellow);
+                        TextRange highlightRange = new TextRange(pointer, nextPointer);
+                        highlightRange.ApplyPropertyValue(TextElement.BackgroundProperty, Brushes.Yellow);
                     }
-                    index++;
+
+                    pointer = nextPointer;
                 }
             }
         }
 
-        private TextPointer GetTextPointerAtOffset(TextPointer start, int offset)
-        {
-            while (offset > 0 && start != null)
-            {
-                if (start.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
-                {
-                    int count = start.GetTextRunLength(LogicalDirection.Forward);
-                    if (offset <= count) return start.GetPositionAtOffset(offset);
-                    offset -= count;
-                }
-                start = start.GetPositionAtOffset(1, LogicalDirection.Forward);
-            }
-            return start;
-        }
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
