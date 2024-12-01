@@ -9,4 +9,3 @@
         <Button Content="OK" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="80" Margin="0,0,0,20" Click="OkButton_Click"/>
     </Grid>
 </Window>
-
